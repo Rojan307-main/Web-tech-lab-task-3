@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+</head>
+ 
+<body>
+ 
+<h1>Registration</h1>
+ 
+<form onsubmit="return validate(this);">
+ 
+<table border="2" width="100%">
+ 
+<tr>
+ 
+<td valign="top">
+ 
+<fieldset>
+<legend><b>General Information</b></legend>
+ 
+First Name :
+<input type="text" name="firstname">
+<span id="fnameErr" style="color:red"></span>
+ 
+<br><br>
+ 
+Last Name :
+<input type="text" name="lastname">
+<span id="lnameErr" style="color:red"></span>
+ 
+<br><br>
+ 
+Gender :
+<input type="radio" name="gender" value="Male"> Male
+<input type="radio" name="gender" value="Female"> Female
+<span id="genderErr" style="color:red"></span>
+ 
+<br><br>
+ 
+Father's Name :
+<input type="text" name="father">
+<span id="fatherErr" style="color:red"></span>
+ 
+<br><br>
+ 
+Mother's Name :
+<input type="text" name="mother">
+<span id="motherErr" style="color:red"></span>
+ 
+<br><br>
+ 
+Photo :
+<input type="file" name="photo">
+ 
+<br><br>
+ 
+Blood Group :
+<select name="blood">
+    <option value="">Select</option>
+    <option>A+</option>
+    <option>B+</option>
+    <option>O+</option>
+</select>
+ 
+<br><br>
+ 
+Religion :
+<select name="religion">
+    <option value="">Select</option>
+    <option>Islam</option>
+    <option>Hindu</option>
+    <option>Buddhist</option>
+</select>
+ 
+</fieldset>
+ 
+</td>
+ 
+<td valign="top">
+ 
+<fieldset>
+ 
+<legend><b>Contact Information</b></legend>
+ 
+Email :
+<input type="text" name="email">
+<span id="emailErr" style="color:red"></span>
+ 
+<br><br>
+ 
+Phone/Mobile :
+<input type="text" name="mobile">
+<span id="mobileErr" style="color:red"></span>
+ 
+<br><br>
+ 
+Website :
+<input type="text" name="website">
+ 
+<br><br>
+ 
+Address :
+ 
+<fieldset>
+ 
+<legend>Present Address</legend>
+ 
+Country :
+<select name="country">
+    <option>Bangladesh</option>
+    <option>India</option>
+</select>
+ 
+City :
+<select name="city">
+    <option>Dhaka</option>
+    <option>Delhi</option>
+</select>
+ 
+<br><br>
+ 
+<textarea rows="5" cols="30"></textarea>
+ 
+<br><br>
+ 
+<input type="text" placeholder="Post Code">
+ 
+</fieldset>
+ 
+</fieldset>
+ 
+</td>
+ 
+<td valign="top">
+ 
+<fieldset>
+ 
+<legend><b>Account Information</b></legend>
+ 
+Username :
+<input type="text" name="username">
+<span id="userErr" style="color:red"></span>
+ 
+<br><br>
+ 
+Password :
+<input type="password" name="password">
+<span id="passErr" style="color:red"></span>
+ 
+<br><br>
+ 
+Confirm Password :
+<input type="password" name="cpassword">
+<span id="cpassErr" style="color:red"></span>
+ 
+<br><br>
+ 
+<input type="submit" value="Register">
+ 
+</fieldset>
+ 
+</td>
+ 
+</tr>
+ 
+</table>
+ 
+</form>
+ 
+<script>
+ 
+function validate(x){
+ 
+    let flag = true;
+ 
+    // Clear Previous Errors
+    document.getElementById("fnameErr").innerHTML = "";
+    document.getElementById("lnameErr").innerHTML = "";
+    document.getElementById("genderErr").innerHTML = "";
+    document.getElementById("fatherErr").innerHTML = "";
+    document.getElementById("motherErr").innerHTML = "";
+    document.getElementById("emailErr").innerHTML = "";
+    document.getElementById("mobileErr").innerHTML = "";
+    document.getElementById("userErr").innerHTML = "";
+    document.getElementById("passErr").innerHTML = "";
+    document.getElementById("cpassErr").innerHTML = "";
+ 
+    // First Name
+    if(x.firstname.value == ""){
+        document.getElementById("fnameErr").innerHTML = " Required";
+        flag = false;
+    }
+ 
+    // Last Name
+    if(x.lastname.value == ""){
+        document.getElementById("lnameErr").innerHTML = " Required";
+        flag = false;
+    }
+ 
+    // Gender
+    if(!x.gender[0].checked && !x.gender[1].checked){
+        document.getElementById("genderErr").innerHTML = " Select Gender";
+        flag = false;
+    }
+ 
+    // Father's Name
+    if(x.father.value == ""){
+        document.getElementById("fatherErr").innerHTML = " Required";
+        flag = false;
+    }
+ 
+    // Mother's Name
+    if(x.mother.value == ""){
+        document.getElementById("motherErr").innerHTML = " Required";
+        flag = false;
+    }
+ 
+    // Email Validation
+    let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+ 
+    if(x.email.value == ""){
+        document.getElementById("emailErr").innerHTML = " Required";
+        flag = false;
+    }
+ 
+    else if(!emailPattern.test(x.email.value)){
+        document.getElementById("emailErr").innerHTML = " Invalid Email";
+        flag = false;
+    }
+ 
+    // Mobile Validation
+    let mobilePattern = /^[0-9]{11}$/;
+ 
+    if(x.mobile.value == ""){
+        document.getElementById("mobileErr").innerHTML = " Required";
+        flag = false;
+    }
+ 
+    else if(!mobilePattern.test(x.mobile.value)){
+        document.getElementById("mobileErr").innerHTML = " Invalid Number";
+        flag = false;
+    }
+ 
+    // Username
+    if(x.username.value == ""){
+        document.getElementById("userErr").innerHTML = " Required";
+        flag = false;
+    }
+ 
+    // Password Validation
+    let password = x.password.value;
+ 
+    let passwordPattern =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&^#])[A-Za-z\d@$!%*?&^#]{8,}$/;
+ 
+    if(password == ""){
+        document.getElementById("passErr").innerHTML = " Required";
+        flag = false;
+    }
+ 
+    else if(!passwordPattern.test(password)){
+        document.getElementById("passErr").innerHTML =
+        "Must contain uppercase, lowercase, number, special character and minimum 8 characters";
+ 
+        flag = false;
+    }
+
+    if(x.cpassword.value == ""){
+        document.getElementById("cpassErr").innerHTML = " Required";
+        flag = false;
+    }
+ 
+    else if(password != x.cpassword.value){
+        document.getElementById("cpassErr").innerHTML = " Password Not Matched";
+        flag = false;
+    }
+ 
+    return flag;
+}
+ 
+</script>
+ 
+</body>
+</html>
+
